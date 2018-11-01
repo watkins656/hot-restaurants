@@ -96,7 +96,9 @@
       $.post("/api/tables", newReservation)
         .then(function(data) {
           console.log(data);
-          alert("Adding reservation...");
+          alert("Adding reservation...").fail(function() {
+    alert( "error" );
+  });
         });
 $("#name").val("");
 $("#phoneNumber").val("");

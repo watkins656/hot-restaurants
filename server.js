@@ -23,6 +23,7 @@ var tables = [
   },
 ];
 
+let wait = [];
 // Routes
 // =============================================================
 
@@ -42,6 +43,9 @@ app.get("/reserve", function(req, res) {
 // Displays all tables
 app.get("/api/tables", function(req, res) {
   return res.json(tables);
+});
+app.get("/api/wait", function(req, res) {
+  return res.json(wait);
 });
 
 // Displays a single character, or returns false
@@ -64,16 +68,45 @@ app.post("/api/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   var newReservation = req.body;
+  console.log;
 
   // Using a RegEx Pattern to remove spaces from newReservation
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+  let flag = false;
+  tables.forEach(element => {
+    if(newReservation.uniqueID === element.uniqueID){
+
+console.log("tables-uniqueID");
+console.log("newReservation-uniqueID: "+ newReservation.uniqueID);
+console.log("element-uniqueID: "+ element.uniqueID);
+flag=true;
+}
+if(newReservation.name===element.name){
   
-
+  console.log("tables-name");
+  flag=true;
+}
+});
+wait.forEach(element => {
+  if(newReservation.uniqueID === element.uniqueID)
+  console.log("wait-uniqueID");
+  {flag=true;}
+  if(newReservation.name===element.name)
+  console.log("tables-name");
+    {flag=true;}
+  });
+console.log("flag = " +flag);
   console.log(newReservation);
-
+  if (flag===false)
+{
+  
+  if(tables.length<5)
   tables.push(newReservation);
-
+  else
+  wait.push(newReservation)
   res.json(newReservation);
+}
+
 });
 
 // Starts the server to begin listening
