@@ -104,9 +104,10 @@ console.log("flag = " +flag);
   tables.push(newReservation);
   else
   wait.push(newReservation)
-  res.json(newReservation);
+  res.json(false);
 }
-
+else
+res.json(true);
 });
 
 // Starts the server to begin listening
