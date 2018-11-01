@@ -100,11 +100,15 @@ console.log("flag = " +flag);
   if (flag===false)
 {
   
-  if(tables.length<5)
-  tables.push(newReservation);
-  else
-  wait.push(newReservation)
-  res.json(false);
+  if(tables.length<5){
+    tables.push(newReservation);
+    res.json("tables");
+  }
+    else{
+
+      wait.push(newReservation)
+      res.json("wait");
+    }
 }
 else
 res.json(true);

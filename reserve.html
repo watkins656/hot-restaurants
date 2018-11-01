@@ -96,9 +96,11 @@
       $.post("/api/tables", newReservation)
         .then(function (data) {
           console.log(data);
-          if (data === false) {
-            alert("Adding reservation...")
+          if (data === "tables") {
+            alert("You have a table...")
           }
+          else if (data === "wait")
+          alert("You have been added to the wait list...")
           else
             alert("You are already on the list!");
 
